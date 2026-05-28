@@ -7,7 +7,7 @@
 <meta name="description" content="Decants de perfumería de nicho. Seleccionados para quienes saben lo que buscan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #000000;
@@ -16,8 +16,7 @@
     --text-dim: #8a8470;
     --gold: #c9a84c;
     --gold-bright: #e2c870;
-    --gold-dark: #8a6a2a;
-    --line: rgba(201, 168, 76, 0.15);
+    --line: rgba(201,168,76,0.15);
     --font-display: 'Cormorant Garamond', Georgia, serif;
     --font-body: 'Inter', -apple-system, sans-serif;
   }
@@ -30,19 +29,46 @@
     color: var(--text);
     font-family: var(--font-body);
     font-weight: 300;
-    line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    cursor: none;
   }
 
+  /* ═══ CUSTOM CURSOR ═══ */
+  .cursor {
+    position: fixed;
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease;
+  }
+  .cursor-ring.hover {
+    width: 60px; height: 60px;
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  /* ═══ GRAIN ═══ */
   body::before {
     content: '';
-    position: fixed;
-    inset: 0;
+    position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
-    opacity: 0.06;
+    opacity: 0.05;
     pointer-events: none;
-    z-index: 1000;
+    z-index: 9998;
     mix-blend-mode: overlay;
   }
 
@@ -50,43 +76,35 @@
   header {
     position: fixed;
     top: 0; left: 0; right: 0;
-    z-index: 100;
+    z-index: 1000;
     padding: 28px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0,0,0,0.4);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--line);
-    transition: all 0.4s ease;
+    background: rgba(0,0,0,0);
+    transition: all 0.5s ease;
   }
   header.scrolled {
     padding: 18px 60px;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line);
   }
   .logo {
     font-family: var(--font-display);
-    font-weight: 300;
-    font-size: 22px;
-    letter-spacing: 0.5em;
-    color: var(--text);
-    text-transform: uppercase;
-    text-decoration: none;
+    font-weight: 300; font-size: 22px;
+    letter-spacing: 0.5em; text-transform: uppercase;
+    color: var(--text); text-decoration: none;
   }
   nav ul { display: flex; gap: 48px; list-style: none; }
   nav a {
-    color: var(--text);
-    text-decoration: none;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    position: relative;
-    transition: color 0.3s ease;
+    color: var(--text); text-decoration: none;
+    font-size: 11px; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    position: relative; transition: color 0.3s ease;
   }
   nav a::after {
-    content: '';
-    position: absolute;
+    content: ''; position: absolute;
     bottom: -6px; left: 0;
     width: 0; height: 1px;
     background: var(--gold);
@@ -94,11 +112,10 @@
   }
   nav a:hover { color: var(--gold-bright); }
   nav a:hover::after { width: 100%; }
-
   .header-icons { display: flex; gap: 24px; align-items: center; }
   .icon-btn {
     background: none; border: none;
-    color: var(--text); cursor: pointer;
+    color: var(--text); cursor: none;
     padding: 6px; transition: color 0.3s ease;
     display: flex; align-items: center;
   }
@@ -109,45 +126,21 @@
   .hero {
     position: relative;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    display: flex; align-items: center;
+    justify-content: center; text-align: center;
     padding: 120px 60px 60px;
     overflow: hidden;
   }
   .hero::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 50% 50%, var(--bg-warm) 0%, #000 70%);
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, #0a0805 0%, #000 70%);
     z-index: 0;
   }
-  .mist {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 1;
-  }
-  .mist-1 {
-    width: 600px; height: 600px;
-    top: 20%; left: 10%;
-    background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%);
-    animation: float1 18s ease-in-out infinite;
-  }
-  .mist-2 {
-    width: 500px; height: 500px;
-    bottom: 10%; right: 5%;
-    background: radial-gradient(circle, rgba(201,168,76,0.06), transparent 70%);
-    animation: float2 22s ease-in-out infinite;
-  }
-  @keyframes float1 {
-    0%, 100% { transform: translate(0,0); }
-    50% { transform: translate(40px, -30px); }
-  }
-  @keyframes float2 {
-    0%, 100% { transform: translate(0,0); }
-    50% { transform: translate(-50px, 40px); }
+  .hero video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; z-index: 0;
+    opacity: 0.20;
   }
   .hero-content {
     position: relative; z-index: 2;
@@ -167,30 +160,23 @@
     background: var(--gold); opacity: 0.5;
   }
   .hero h1 {
-    font-family: var(--font-display);
-    font-weight: 200;
+    font-family: var(--font-display); font-weight: 200;
     font-size: clamp(38px, 6.5vw, 84px);
-    line-height: 1.05;
-    margin-bottom: 32px;
-    color: var(--text);
+    line-height: 1.05; margin-bottom: 32px; color: var(--text);
   }
   .hero h1 em { font-style: italic; color: var(--gold-bright); font-weight: 300; }
   .hero p {
     font-size: 17px; font-weight: 300;
-    color: var(--text-dim);
-    max-width: 580px; margin: 0 auto 56px;
-    line-height: 1.7;
+    color: var(--text-dim); max-width: 580px;
+    margin: 0 auto 56px; line-height: 1.7;
   }
   .btn {
-    display: inline-block;
-    padding: 18px 44px;
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--gold);
-    text-decoration: none;
+    display: inline-block; padding: 18px 44px;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--gold); text-decoration: none;
     font-size: 11px; font-weight: 500;
     letter-spacing: 0.3em; text-transform: uppercase;
-    cursor: pointer; position: relative; overflow: hidden;
+    cursor: none; position: relative; overflow: hidden;
     transition: color 0.4s ease;
   }
   .btn::before {
@@ -202,7 +188,6 @@
   }
   .btn:hover { color: #000; }
   .btn:hover::before { left: 0; }
-
   .scroll-indicator {
     position: absolute; bottom: 40px; left: 50%;
     transform: translateX(-50%); z-index: 3;
@@ -217,13 +202,191 @@
     background: linear-gradient(to bottom, var(--gold), transparent);
     animation: scrollPulse 2s ease-in-out infinite;
   }
-  @keyframes scrollPulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
-    50% { opacity: 1; transform: scaleY(1); }
+
+  /* ═══ MARQUEE ═══ */
+  .marquee-section {
+    padding: 40px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    overflow: hidden;
+    background: var(--bg-warm);
+  }
+  .marquee-track {
+    display: flex; gap: 60px;
+    animation: marquee 20s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: var(--font-display);
+    font-style: italic; font-size: 18px;
+    color: var(--gold); white-space: nowrap;
+    letter-spacing: 0.1em;
+  }
+  .marquee-dot {
+    color: var(--text-dim); font-size: 8px;
+    align-self: center;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 
+  /* ═══ FULLSCREEN PRODUCT SLIDER ═══ */
+  .product-slider {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  .product-slide {
+    position: absolute; inset: 0;
+    display: flex; align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+    pointer-events: none;
+  }
+  .product-slide.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .slide-bg {
+    position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+    transform: scale(1.05);
+    transition: transform 8s ease;
+  }
+  .product-slide.active .slide-bg {
+    transform: scale(1);
+  }
+  .slide-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0,0,0,0.85) 0%,
+      rgba(0,0,0,0.4) 50%,
+      rgba(0,0,0,0.2) 100%
+    );
+  }
+  .slide-content {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px; max-width: 1400px;
+    width: 100%; padding: 0 80px;
+    align-items: center;
+  }
+  .slide-text { text-align: left; }
+  .slide-number {
+    font-family: var(--font-display);
+    font-style: italic; font-size: 120px;
+    color: var(--gold); opacity: 0.08;
+    line-height: 1; margin-bottom: -40px;
+    display: block;
+  }
+  .slide-brand {
+    font-size: 11px; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .slide-name {
+    font-family: var(--font-display); font-weight: 200;
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 1.05; color: var(--text);
+    margin-bottom: 20px;
+  }
+  .slide-notes {
+    font-size: 13px; color: var(--text-dim);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 40px;
+  }
+  .slide-price-row {
+    display: flex; align-items: center; gap: 32px;
+    margin-bottom: 40px;
+  }
+  .slide-price {
+    font-family: var(--font-display); font-size: 28px;
+    color: var(--text); letter-spacing: 0.05em;
+  }
+  .slide-price span {
+    font-size: 12px; color: var(--text-dim);
+    margin-left: 6px; letter-spacing: 0.2em;
+  }
+  .size-selector { display: flex; gap: 8px; }
+  .size-btn {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    background: transparent; color: var(--text-dim);
+    font-size: 10px; letter-spacing: 0.2em;
+    text-transform: uppercase; cursor: none;
+    transition: all 0.3s ease; font-family: var(--font-body);
+  }
+  .size-btn:hover, .size-btn.active {
+    border-color: var(--gold); color: var(--gold);
+  }
+  .slide-image {
+    display: flex; align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .slide-image img {
+    max-height: 70vh; max-width: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 60px rgba(201,168,76,0.15));
+    transform: translateY(20px);
+    transition: transform 1.5s ease;
+  }
+  .product-slide.active .slide-image img {
+    transform: translateY(0);
+  }
+
+  /* Slider navigation */
+  .slider-nav {
+    position: absolute; bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 12px; z-index: 10;
+  }
+  .slider-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--text-dim);
+    cursor: none; transition: all 0.3s ease;
+    border: none;
+  }
+  .slider-dot.active {
+    background: var(--gold);
+    transform: scale(1.4);
+  }
+  .slider-arrows {
+    position: absolute; top: 50%; z-index: 10;
+    width: 100%; display: flex;
+    justify-content: space-between;
+    padding: 0 40px; transform: translateY(-50%);
+  }
+  .slider-arrow {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid var(--line);
+    color: var(--text); cursor: none;
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s ease; backdrop-filter: blur(10px);
+  }
+  .slider-arrow:hover {
+    border-color: var(--gold); color: var(--gold);
+    background: rgba(201,168,76,0.1);
+  }
+  .slider-arrow svg { width: 20px; height: 20px; }
+
+  /* Slider counter */
+  .slider-counter {
+    position: absolute; top: 40px; right: 60px;
+    z-index: 10; font-family: var(--font-display);
+    font-style: italic; font-size: 16px;
+    color: var(--text-dim); letter-spacing: 0.1em;
+  }
+  .slider-counter span { color: var(--gold); }
+
   /* ═══ VALUES ═══ */
-  .values { padding: 160px 60px; position: relative; }
+  .values { padding: 160px 60px; }
   .section-header { text-align: center; margin-bottom: 100px; }
   .section-eyebrow {
     font-size: 11px; font-weight: 400;
@@ -231,8 +394,7 @@
     color: var(--gold); margin-bottom: 20px;
   }
   .section-title {
-    font-family: var(--font-display);
-    font-weight: 200;
+    font-family: var(--font-display); font-weight: 200;
     font-size: clamp(32px, 4.5vw, 56px);
     line-height: 1.1; color: var(--text);
   }
@@ -265,6 +427,7 @@
   .manifesto {
     padding: 200px 60px; text-align: center;
     background: linear-gradient(180deg, var(--bg) 0%, var(--bg-warm) 50%, var(--bg) 100%);
+    position: relative; overflow: hidden;
   }
   .manifesto-quote {
     font-family: var(--font-display); font-weight: 200;
@@ -280,95 +443,6 @@
     margin: 60px auto 0;
   }
 
-  /* ═══ COLLECTION ═══ */
-  .collection { padding: 160px 60px; }
-  .products-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 60px; max-width: 1400px; margin: 0 auto;
-  }
-  .product { cursor: pointer; transition: transform 0.6s ease; }
-  .product:hover { transform: translateY(-8px); }
-  .product-image {
-    position: relative; aspect-ratio: 3/4;
-    background: linear-gradient(135deg, #0d0a05 0%, #1a1408 50%, #0a0805 100%);
-    margin-bottom: 28px; overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .product-image::after {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.6) 100%);
-  }
-  .bottle {
-    position: relative; z-index: 2;
-    transition: transform 0.6s ease;
-  }
-  .product:hover .bottle { transform: scale(1.08); }
-  .product-brand {
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
-  }
-  .product-name {
-    font-family: var(--font-display); font-weight: 300;
-    font-size: 22px; line-height: 1.2;
-    color: var(--text); margin-bottom: 6px;
-  }
-  .product-notes {
-    font-size: 12px; color: var(--text-dim);
-    letter-spacing: 0.05em; font-style: italic; margin-bottom: 20px;
-  }
-  .product-footer {
-    display: flex; justify-content: space-between;
-    align-items: center; margin-top: 8px;
-  }
-  .product-price {
-    font-family: var(--font-display);
-    font-size: 20px; color: var(--text); letter-spacing: 0.05em;
-  }
-  .product-price span {
-    font-size: 11px; color: var(--text-dim);
-    margin-left: 6px; letter-spacing: 0.2em;
-  }
-
-  /* ─── Botón comprar producto ─── */
-  .btn-buy {
-    display: inline-block;
-    padding: 12px 24px;
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    text-decoration: none;
-    font-size: 10px; font-weight: 500;
-    letter-spacing: 0.25em; text-transform: uppercase;
-    position: relative; overflow: hidden;
-    transition: color 0.4s ease;
-  }
-  .btn-buy::before {
-    content: ''; position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: var(--gold);
-    transition: left 0.4s ease; z-index: -1;
-  }
-  .btn-buy:hover { color: #000; }
-  .btn-buy:hover::before { left: 0; }
-
-  /* Selector de tamaño */
-  .size-selector {
-    display: flex; gap: 8px; margin-bottom: 20px;
-  }
-  .size-btn {
-    padding: 8px 14px;
-    border: 1px solid var(--line);
-    background: transparent; color: var(--text-dim);
-    font-size: 10px; letter-spacing: 0.2em;
-    text-transform: uppercase; cursor: pointer;
-    transition: all 0.3s ease; font-family: var(--font-body);
-  }
-  .size-btn:hover, .size-btn.active {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
   /* ═══ ABOUT ═══ */
   .about {
     padding: 180px 60px; background: var(--bg-warm);
@@ -381,7 +455,8 @@
   .about-container {
     max-width: 1300px; margin: 0 auto;
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 100px; align-items: center; position: relative; z-index: 2;
+    gap: 100px; align-items: center;
+    position: relative; z-index: 2;
   }
   .about-visual {
     position: relative; aspect-ratio: 4/5;
@@ -425,8 +500,7 @@
     width: 1px; background: var(--line);
   }
   .guarantee-icon {
-    width: 48px; height: 48px;
-    margin: 0 auto 24px;
+    width: 48px; height: 48px; margin: 0 auto 24px;
     display: flex; align-items: center; justify-content: center;
     color: var(--gold);
   }
@@ -475,7 +549,7 @@
     background: transparent; border: none; color: var(--gold);
     font-family: var(--font-body); font-size: 11px;
     letter-spacing: 0.3em; text-transform: uppercase;
-    cursor: pointer; padding: 16px 24px; transition: color 0.3s ease;
+    cursor: none; padding: 16px 24px; transition: color 0.3s ease;
   }
   .newsletter-form button:hover { color: var(--gold-bright); }
 
@@ -520,28 +594,41 @@
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.7); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
   .reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s ease, transform 1s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ═══ RESPONSIVE ═══ */
   @media (max-width: 968px) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
     header { padding: 20px 24px; }
     header.scrolled { padding: 14px 24px; }
     nav ul { display: none; }
     .hero { padding: 120px 24px 60px; }
-    .values, .manifesto, .collection, .about, .guarantees, .newsletter { padding-left: 24px; padding-right: 24px; }
+    .slide-content { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; text-align: center; }
+    .slide-image { order: -1; }
+    .slide-image img { max-height: 40vh; }
+    .values, .manifesto, .about, .guarantees, .newsletter { padding-left: 24px; padding-right: 24px; }
     .values-grid { grid-template-columns: 1fr; }
-    .products-grid { grid-template-columns: 1fr; gap: 40px; }
     .about-container { grid-template-columns: 1fr; gap: 60px; }
     .guarantees-grid { grid-template-columns: repeat(2, 1fr); }
     .guarantee:not(:last-child)::after { display: none; }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     .footer-brand { grid-column: 1 / -1; }
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
+    .slider-arrows { display: none; }
   }
 </style>
 </head>
 <body>
+
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
 <!-- ═══ HEADER ═══ -->
 <header id="header">
@@ -555,10 +642,10 @@
     </ul>
   </nav>
   <div class="header-icons">
-    <button class="icon-btn" aria-label="Buscar">
+    <button class="icon-btn">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="m21 21-4.3-4.3"/></svg>
     </button>
-    <button class="icon-btn" aria-label="Cuenta">
+    <button class="icon-btn">
       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke-width="1.5"/><path stroke-width="1.5" d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
     </button>
   </div>
@@ -566,13 +653,9 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="inicio">
-  <!-- Video background -->
-  <video autoplay muted loop playsinline
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.20;">
+  <video autoplay muted loop playsinline>
     <source src="hero.mp4" type="video/mp4">
   </video>
-  <div class="mist mist-1"></div>
-  <div class="mist mist-2"></div>
   <div class="hero-content">
     <div class="hero-eyebrow">Perfumería de nicho</div>
     <h1>La fragancia que no encontrarás en ningún <em>otro lugar</em>.</h1>
@@ -582,6 +665,136 @@
   <div class="scroll-indicator">
     <span>Descubrir</span>
     <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Baccarat Rouge 540</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Aventus · Creed</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Black Afgano</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Perfumería de nicho</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Oscuridad destilada</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Decants exclusivos</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Baccarat Rouge 540</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Aventus · Creed</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Black Afgano</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Perfumería de nicho</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Oscuridad destilada</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Decants exclusivos</span>
+    <span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<!-- ═══ FULLSCREEN PRODUCT SLIDER ═══ -->
+<section class="product-slider" id="coleccion">
+
+  <!-- Slide 1 — Baccarat Rouge 540 -->
+  <div class="product-slide active" data-index="0">
+    <div class="slide-bg" style="background-image: url('baccarat.jpg'); background-size: cover;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-text">
+        <span class="slide-number">01</span>
+        <div class="slide-brand">Maison Francis Kurkdjian</div>
+        <h2 class="slide-name">Baccarat<br>Rouge 540</h2>
+        <div class="slide-notes">Azafrán · Jazmín · Ámbar · Cedro</div>
+        <div class="size-selector" id="sizes-0">
+          <button class="size-btn active" data-price="38€" data-size="5ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">5ml</button>
+          <button class="size-btn" data-price="65€" data-size="10ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">10ml</button>
+          <button class="size-btn" data-price="90€" data-size="15ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">15ml</button>
+        </div>
+        <div class="slide-price-row">
+          <div class="slide-price" id="price-0">38€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03" class="btn" id="link-0" target="_blank">Comprar ahora</a>
+        </div>
+      </div>
+      <div class="slide-image">
+        <img src="baccarat.jpg" alt="Baccarat Rouge 540">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 2 — Aventus -->
+  <div class="product-slide" data-index="1">
+    <div class="slide-bg" style="background-image: url('aventus.jpg'); background-size: cover;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-text">
+        <span class="slide-number">02</span>
+        <div class="slide-brand">Creed</div>
+        <h2 class="slide-name">Aventus</h2>
+        <div class="slide-notes">Piña · Abedul · Almizcle · Patchouli</div>
+        <div class="size-selector" id="sizes-1">
+          <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">5ml</button>
+          <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">10ml</button>
+          <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">15ml</button>
+        </div>
+        <div class="slide-price-row">
+          <div class="slide-price" id="price-1">28€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02" class="btn" id="link-1" target="_blank">Comprar ahora</a>
+        </div>
+      </div>
+      <div class="slide-image">
+        <img src="aventus.jpg" alt="Aventus Creed">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3 — Black Afgano -->
+  <div class="product-slide" data-index="2">
+    <div class="slide-bg" style="background-image: url('afgano.jpg'); background-size: cover;"></div>
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-text">
+        <span class="slide-number">03</span>
+        <div class="slide-brand">Nasomatto</div>
+        <h2 class="slide-name">Black<br>Afgano</h2>
+        <div class="slide-notes">Oud · Cannabis · Resinas · Madera</div>
+        <div class="size-selector" id="sizes-2">
+          <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">5ml</button>
+          <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">10ml</button>
+          <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">15ml</button>
+        </div>
+        <div class="slide-price-row">
+          <div class="slide-price" id="price-2">28€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00" class="btn" id="link-2" target="_blank">Comprar ahora</a>
+        </div>
+      </div>
+      <div class="slide-image">
+        <img src="afgano.jpg" alt="Black Afgano Nasomatto">
+      </div>
+    </div>
+  </div>
+
+  <!-- Slider controls -->
+  <div class="slider-counter">
+    <span id="currentSlide">01</span> / 03
+  </div>
+  <div class="slider-arrows">
+    <button class="slider-arrow" id="prevBtn">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" d="m15 18-6-6 6-6"/></svg>
+    </button>
+    <button class="slider-arrow" id="nextBtn">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+  <div class="slider-nav">
+    <button class="slider-dot active" data-slide="0"></button>
+    <button class="slider-dot" data-slide="1"></button>
+    <button class="slider-dot" data-slide="2"></button>
   </div>
 </section>
 
@@ -617,74 +830,6 @@
     <span>Se huele.</span>
   </div>
   <div class="manifesto-mark"></div>
-</section>
-
-<!-- ═══ COLLECTION ═══ -->
-<section class="collection reveal" id="coleccion">
-  <div class="section-header">
-    <div class="section-eyebrow">La selección</div>
-    <h2 class="section-title">Fragancias <em>esenciales</em></h2>
-  </div>
-  <div class="products-grid">
-
-    <!-- PRODUCTO 1 — Baccarat Rouge 540 -->
-    <article class="product">
-      <div class="product-image">
-        <img src="baccarat.jpg" alt="Baccarat Rouge 540" class="bottle" style="width:100%;height:100%;object-fit:cover;object-position:center;"/>
-      </div>
-      <div class="product-brand">Maison Francis Kurkdjian</div>
-      <h3 class="product-name">Baccarat Rouge 540</h3>
-      <p class="product-notes">Azafrán · Jazmín · Ámbar</p>
-      <div class="size-selector">
-        <button class="size-btn active" data-size="5ml" data-price="38€" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">5ml</button>
-        <button class="size-btn" data-size="10ml" data-price="65€" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">10ml</button>
-        <button class="size-btn" data-size="15ml" data-price="90€" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">15ml</button>
-      </div>
-      <div class="product-footer">
-        <div class="product-price" id="price-br540">38€ <span>5ML</span></div>
-        <a href="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03" class="btn-buy" id="link-br540" target="_blank">Comprar</a>
-      </div>
-    </article>
-
-    <!-- PRODUCTO 2 — Aventus Creed -->
-    <article class="product">
-      <div class="product-image">
-        <img src="aventus.jpg" alt="Aventus Creed" class="bottle" style="width:100%;height:100%;object-fit:cover;object-position:center;"/>
-      </div>
-      <div class="product-brand">Creed</div>
-      <h3 class="product-name">Aventus</h3>
-      <p class="product-notes">Piña · Abedul · Almizcle</p>
-      <div class="size-selector">
-        <button class="size-btn active" data-size="5ml" data-price="28€" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">5ml</button>
-        <button class="size-btn" data-size="10ml" data-price="48€" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">10ml</button>
-        <button class="size-btn" data-size="15ml" data-price="65€" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">15ml</button>
-      </div>
-      <div class="product-footer">
-        <div class="product-price" id="price-aventus">28€ <span>5ML</span></div>
-        <a href="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02" class="btn-buy" id="link-aventus" target="_blank">Comprar</a>
-      </div>
-    </article>
-
-    <!-- PRODUCTO 3 — Black Afgano -->
-    <article class="product">
-      <div class="product-image">
-        <img src="afgano.jpg" alt="Black Afgano Nasomatto" class="bottle" style="width:100%;height:100%;object-fit:cover;object-position:center;"/>
-      </div>
-      <div class="product-brand">Nasomatto</div>
-      <h3 class="product-name">Black Afgano</h3>
-      <p class="product-notes">Oud · Cannabis · Resinas</p>
-      <div class="size-selector">
-        <button class="size-btn active" data-size="5ml" data-price="28€" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">5ml</button>
-        <button class="size-btn" data-size="10ml" data-price="48€" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">10ml</button>
-        <button class="size-btn" data-size="15ml" data-price="65€" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">15ml</button>
-      </div>
-      <div class="product-footer">
-        <div class="product-price" id="price-afgano">28€ <span>5ML</span></div>
-        <a href="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00" class="btn-buy" id="link-afgano" target="_blank">Comprar</a>
-      </div>
-    </article>
-
-  </div>
 </section>
 
 <!-- ═══ ABOUT ═══ -->
@@ -789,10 +934,10 @@
   <div class="footer-bottom">
     <div>© 2026 Brume Nox · Todos los derechos reservados</div>
     <div class="socials">
-      <a href="https://instagram.com/brumenox" aria-label="Instagram" target="_blank">
+      <a href="https://instagram.com/brumenox" target="_blank">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="0.8" fill="currentColor"/></svg>
       </a>
-      <a href="https://tiktok.com/@brumenox" aria-label="TikTok" target="_blank">
+      <a href="https://tiktok.com/@brumenox" target="_blank">
         <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.6 6.3a4.8 4.8 0 0 1-3.8-4.3h-3.7v14a2.7 2.7 0 1 1-2.7-2.7c.3 0 .6 0 .9.1V9.6a6.4 6.4 0 0 0-.9-.1 6.4 6.4 0 1 0 6.4 6.4V8.6a8.4 8.4 0 0 0 4.7 1.4V6.3Z"/></svg>
       </a>
     </div>
@@ -800,13 +945,39 @@
 </footer>
 
 <script>
-  // Header scroll
+  // ── Custom cursor ──
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mouseX = 0, mouseY = 0;
+  let ringX = 0, ringY = 0;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateRing() {
+    ringX += (mouseX - ringX) * 0.12;
+    ringY += (mouseY - ringY) * 0.12;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .value-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+  });
+
+  // ── Header scroll ──
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
   });
 
-  // Reveal on scroll
+  // ── Reveal on scroll ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
@@ -814,32 +985,56 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Size selector logic
-  const sizeConfigs = {
-    'br540':  { '5ml': { price: '38€', link: 'https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03' }, '10ml': { price: '65€', link: 'https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03' }, '15ml': { price: '90€', link: 'https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03' } },
-    'aventus':{ '5ml': { price: '28€', link: 'https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02' }, '10ml': { price: '48€', link: 'https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02' }, '15ml': { price: '65€', link: 'https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02' } },
-    'afgano': { '5ml': { price: '28€', link: 'https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00' }, '10ml': { price: '48€', link: 'https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00' }, '15ml': { price: '65€', link: 'https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00' } }
-  };
+  // ── Product Slider ──
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.product-slide');
+  const dots = document.querySelectorAll('.slider-dot');
+  const counter = document.getElementById('currentSlide');
+  let autoSlide;
 
-  document.querySelectorAll('.size-selector').forEach(selector => {
+  function goToSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    currentSlide = (index + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+    counter.textContent = String(currentSlide + 1).padStart(2, '0');
+  }
+
+  function startAuto() {
+    autoSlide = setInterval(() => goToSlide(currentSlide + 1), 5000);
+  }
+  function stopAuto() { clearInterval(autoSlide); }
+
+  document.getElementById('nextBtn').addEventListener('click', () => { stopAuto(); goToSlide(currentSlide + 1); startAuto(); });
+  document.getElementById('prevBtn').addEventListener('click', () => { stopAuto(); goToSlide(currentSlide - 1); startAuto(); });
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => { stopAuto(); goToSlide(parseInt(dot.dataset.slide)); startAuto(); });
+  });
+
+  // Touch/swipe support
+  let touchStartX = 0;
+  document.querySelector('.product-slider').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+  document.querySelector('.product-slider').addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) { stopAuto(); goToSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1); startAuto(); }
+  });
+
+  startAuto();
+
+  // ── Size selector ──
+  document.querySelectorAll('.size-selector').forEach((selector, idx) => {
     selector.querySelectorAll('.size-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const product = selector.closest('article');
-        const priceEl = product.querySelector('[id^="price-"]');
-        const linkEl = product.querySelector('[id^="link-"]');
-        const productKey = priceEl.id.replace('price-', '');
-        const size = btn.dataset.size;
-
         selector.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const config = sizeConfigs[productKey][size];
-        priceEl.innerHTML = `${config.price} <span>${size.toUpperCase()}</span>`;
-        linkEl.href = config.link;
+        const priceEl = document.getElementById('price-' + idx);
+        const linkEl = document.getElementById('link-' + idx);
+        priceEl.innerHTML = btn.dataset.price + ' <span>' + btn.dataset.size + '</span>';
+        linkEl.href = btn.dataset.link;
       });
     });
   });
 </script>
-
 </body>
 </html>
