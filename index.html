@@ -318,6 +318,91 @@
     border-color: var(--gold); color: var(--gold);
   }
 
+  /* ═══ DISCOVERY SET ═══ */
+  .discovery {
+    padding: 140px 60px;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .discovery::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,0.04), transparent 60%);
+  }
+  .discovery-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+  .discovery-image {
+    position: relative;
+    overflow: hidden;
+  }
+  .discovery-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .discovery-image:hover img {
+    transform: scale(1.03);
+  }
+  .discovery-title {
+    font-family: var(--font-display);
+    font-weight: 200;
+    font-size: clamp(32px, 3.5vw, 52px);
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+  .discovery-title em {
+    font-style: italic;
+    color: var(--gold-bright);
+  }
+  .discovery-desc {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text-dim);
+    margin-bottom: 36px;
+  }
+  .discovery-includes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 36px;
+  }
+  .discovery-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+  .discovery-dot {
+    color: var(--gold);
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+  .discovery-price {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--text-dim);
+    margin-bottom: 36px;
+    letter-spacing: 0.05em;
+  }
+  .discovery-price strong {
+    color: var(--text);
+    font-weight: 300;
+    font-size: 28px;
+  }
+
   /* ═══ VALUES ═══ */
   .values { padding: 160px 60px; }
   .section-header { text-align: center; margin-bottom: 100px; }
@@ -574,6 +659,8 @@
     .product-card-info { flex-direction: column; gap: 20px; }
     .product-card-right { text-align: left; margin-left: 0; }
     .card-size-selector { justify-content: flex-start; }
+    .discovery { padding: 80px 24px; }
+    .discovery-container { grid-template-columns: 1fr; gap: 40px; }
     .values, .manifesto, .about, .guarantees, .newsletter { padding-left: 24px; padding-right: 24px; }
     .values-grid { grid-template-columns: 1fr; }
     .about-container { grid-template-columns: 1fr; gap: 60px; }
@@ -737,7 +824,35 @@
   </div>
 </section>
 
-<!-- ═══ VALUES ═══ -->
+<!-- ═══ DISCOVERY SET ═══ -->
+<section class="discovery reveal">
+  <div class="discovery-container">
+    <div class="discovery-image">
+      <img src="discovery.png" alt="Brume Nox Discovery Set">
+    </div>
+    <div class="discovery-text">
+      <div class="section-eyebrow">Colección exclusiva</div>
+      <h2 class="discovery-title">¿No sabes por<br>dónde <em>empezar</em>?</h2>
+      <p class="discovery-desc">Tres iconos de la perfumería de nicho en un solo estuche. Seleccionados por Brume Nox para quienes quieren descubrir el lujo antes de elegir.</p>
+      <div class="discovery-includes">
+        <div class="discovery-item">
+          <span class="discovery-dot">✦</span>
+          <span>Black Afgano · Nasomatto</span>
+        </div>
+        <div class="discovery-item">
+          <span class="discovery-dot">✦</span>
+          <span>Aventus · Creed</span>
+        </div>
+        <div class="discovery-item">
+          <span class="discovery-dot">✦</span>
+          <span>Baccarat Rouge 540 · MFK</span>
+        </div>
+      </div>
+      <div class="discovery-price">Desde <strong>75€</strong></div>
+      <a href="#contacto" class="btn">Descubrir el set</a>
+    </div>
+  </div>
+</section>
 <section class="values reveal">
   <div class="section-header">
     <div class="section-eyebrow">Filosofía</div>
