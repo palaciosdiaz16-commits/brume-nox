@@ -7,7 +7,7 @@
 <meta name="description" content="Decants de perfumería de nicho. Seleccionados para quienes saben lo que buscan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;1,200;1,300&family=Inter:wght@200;300;400;500&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #000000;
@@ -205,26 +205,30 @@
 
   /* ═══ MARQUEE ═══ */
   .marquee-section {
-    padding: 40px 0;
+    padding: 28px 0;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
     overflow: hidden;
-    background: var(--bg-warm);
+    background: #000;
   }
   .marquee-track {
-    display: flex; gap: 60px;
-    animation: marquee 20s linear infinite;
+    display: flex; gap: 80px;
+    animation: marquee 40s linear infinite;
     width: max-content;
   }
   .marquee-item {
-    font-family: var(--font-display);
-    font-style: italic; font-size: 18px;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 20px;
     color: var(--gold); white-space: nowrap;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+    opacity: 0.85;
   }
   .marquee-dot {
-    color: var(--text-dim); font-size: 8px;
+    color: var(--gold);
+    font-size: 6px;
     align-self: center;
+    opacity: 0.35;
   }
   @keyframes marquee {
     from { transform: translateX(0); }
@@ -652,29 +656,29 @@
 <!-- ═══ MARQUEE ═══ -->
 <div class="marquee-section">
   <div class="marquee-track">
-    <span class="marquee-item">Baccarat Rouge 540</span>
-    <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Aventus · Creed</span>
-    <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Black Afgano</span>
+    <span class="marquee-item">Oscuridad destilada</span>
     <span class="marquee-dot">✦</span>
     <span class="marquee-item">Perfumería de nicho</span>
     <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Oscuridad destilada</span>
+    <span class="marquee-item">Solo lo que merece la pena</span>
     <span class="marquee-dot">✦</span>
     <span class="marquee-item">Decants exclusivos</span>
     <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Baccarat Rouge 540</span>
+    <span class="marquee-item">Para quienes saben</span>
     <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Aventus · Creed</span>
+    <span class="marquee-item">Autenticidad garantizada</span>
     <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Black Afgano</span>
+    <span class="marquee-item">Oscuridad destilada</span>
     <span class="marquee-dot">✦</span>
     <span class="marquee-item">Perfumería de nicho</span>
     <span class="marquee-dot">✦</span>
-    <span class="marquee-item">Oscuridad destilada</span>
+    <span class="marquee-item">Solo lo que merece la pena</span>
     <span class="marquee-dot">✦</span>
     <span class="marquee-item">Decants exclusivos</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Para quienes saben</span>
+    <span class="marquee-dot">✦</span>
+    <span class="marquee-item">Autenticidad garantizada</span>
     <span class="marquee-dot">✦</span>
   </div>
 </div>
@@ -962,6 +966,7 @@
       });
     });
   });
+
 </script>
 </body>
 </html>
