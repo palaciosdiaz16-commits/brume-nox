@@ -231,159 +231,127 @@
     to { transform: translateX(-50%); }
   }
 
-  /* ═══ FULLSCREEN PRODUCT SLIDER ═══ */
-  .product-slider {
+  /* ═══ EDITORIAL PRODUCT GRID ═══ */
+  .product-grid-section {
+    padding: 120px 60px;
+    background: var(--bg);
+  }
+  .product-grid-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: var(--line);
+  }
+  .product-card {
     position: relative;
-    height: 100vh;
+    background: var(--bg);
+    overflow: hidden;
+    cursor: none;
+  }
+  .product-card-img {
+    position: relative;
+    aspect-ratio: 4/5;
     overflow: hidden;
   }
-  .product-slide {
-    position: absolute; inset: 0;
-    display: flex; align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 1.2s ease;
-    pointer-events: none;
+  .product-card-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
   }
-  .product-slide.active {
-    opacity: 1;
-    pointer-events: all;
-  }
-  .slide-bg {
-    position: absolute; inset: 0;
-    background-size: cover; background-position: center;
+  .product-card:hover .product-card-img img {
     transform: scale(1.05);
-    transition: transform 8s ease;
   }
-  .product-slide.active .slide-bg {
-    transform: scale(1);
-  }
-  .slide-overlay {
+  .product-card-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(
-      to right,
-      rgba(0,0,0,0.85) 0%,
-      rgba(0,0,0,0.4) 50%,
-      rgba(0,0,0,0.2) 100%
-    );
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
+    transition: opacity 0.4s ease;
   }
-  .slide-content {
-    position: relative; z-index: 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px; max-width: 1400px;
-    width: 100%; padding: 0 80px;
-    align-items: center;
+  .product-card-info {
+    padding: 32px 36px;
+    background: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid var(--line);
   }
-  .slide-text { text-align: left; }
-  .slide-number {
-    font-family: var(--font-display);
-    font-style: italic; font-size: 120px;
-    color: var(--gold); opacity: 0.08;
-    line-height: 1; margin-bottom: -40px;
-    display: block;
-  }
-  .slide-brand {
-    font-size: 11px; letter-spacing: 0.4em;
+  .product-card-brand {
+    font-size: 10px; letter-spacing: 0.35em;
     text-transform: uppercase; color: var(--gold);
-    margin-bottom: 16px;
+    margin-bottom: 8px;
   }
-  .slide-name {
+  .product-card-name {
     font-family: var(--font-display); font-weight: 200;
-    font-size: clamp(42px, 5vw, 72px);
-    line-height: 1.05; color: var(--text);
-    margin-bottom: 20px;
+    font-size: 28px; color: var(--text);
+    line-height: 1.1;
   }
-  .slide-notes {
-    font-size: 13px; color: var(--text-dim);
-    letter-spacing: 0.15em; text-transform: uppercase;
-    margin-bottom: 40px;
+  .product-card-notes {
+    font-size: 11px; color: var(--text-dim);
+    letter-spacing: 0.1em; margin-top: 6px;
+    font-style: italic;
   }
-  .slide-price-row {
-    display: flex; align-items: center; gap: 32px;
-    margin-bottom: 40px;
+  .product-card-right {
+    text-align: right; flex-shrink: 0; margin-left: 20px;
   }
-  .slide-price {
-    font-family: var(--font-display); font-size: 28px;
-    color: var(--text); letter-spacing: 0.05em;
+  .product-card-price {
+    font-family: var(--font-display); font-size: 22px;
+    color: var(--text); margin-bottom: 16px;
   }
-  .slide-price span {
-    font-size: 12px; color: var(--text-dim);
-    margin-left: 6px; letter-spacing: 0.2em;
+  .product-card-price span {
+    font-size: 11px; color: var(--text-dim);
+    margin-left: 4px; letter-spacing: 0.2em;
   }
-  .size-selector { display: flex; gap: 8px; }
+  .btn-discover {
+    display: inline-block;
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    font-size: 10px; font-weight: 500;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    cursor: none; position: relative; overflow: hidden;
+    transition: color 0.4s ease; white-space: nowrap;
+  }
+  .btn-discover::before {
+    content: ''; position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--gold);
+    transition: left 0.4s ease; z-index: -1;
+  }
+  .btn-discover:hover { color: #000; }
+  .btn-discover:hover::before { left: 0; }
+
+  /* Third product — full width */
+  .product-card.full-width {
+    grid-column: 1 / -1;
+  }
+  .product-card.full-width .product-card-img {
+    aspect-ratio: 16/7;
+  }
+
+  /* Size selector in card */
+  .card-size-selector {
+    display: flex; gap: 6px; margin-bottom: 12px;
+    justify-content: flex-end;
+  }
   .size-btn {
-    padding: 8px 14px;
+    padding: 6px 10px;
     border: 1px solid var(--line);
     background: transparent; color: var(--text-dim);
-    font-size: 10px; letter-spacing: 0.2em;
+    font-size: 9px; letter-spacing: 0.2em;
     text-transform: uppercase; cursor: none;
     transition: all 0.3s ease; font-family: var(--font-body);
   }
   .size-btn:hover, .size-btn.active {
     border-color: var(--gold); color: var(--gold);
   }
-  .slide-image {
-    display: flex; align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  .slide-image img {
-    max-height: 70vh; max-width: 100%;
-    object-fit: contain;
-    filter: drop-shadow(0 0 60px rgba(201,168,76,0.15));
-    transform: translateY(20px);
-    transition: transform 1.5s ease;
-  }
-  .product-slide.active .slide-image img {
-    transform: translateY(0);
-  }
-
-  /* Slider navigation */
-  .slider-nav {
-    position: absolute; bottom: 40px; left: 50%;
-    transform: translateX(-50%);
-    display: flex; gap: 12px; z-index: 10;
-  }
-  .slider-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--text-dim);
-    cursor: none; transition: all 0.3s ease;
-    border: none;
-  }
-  .slider-dot.active {
-    background: var(--gold);
-    transform: scale(1.4);
-  }
-  .slider-arrows {
-    position: absolute; top: 50%; z-index: 10;
-    width: 100%; display: flex;
-    justify-content: space-between;
-    padding: 0 40px; transform: translateY(-50%);
-  }
-  .slider-arrow {
-    background: rgba(0,0,0,0.5);
-    border: 1px solid var(--line);
-    color: var(--text); cursor: none;
-    width: 52px; height: 52px;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s ease; backdrop-filter: blur(10px);
-  }
-  .slider-arrow:hover {
-    border-color: var(--gold); color: var(--gold);
-    background: rgba(201,168,76,0.1);
-  }
-  .slider-arrow svg { width: 20px; height: 20px; }
-
-  /* Slider counter */
-  .slider-counter {
-    position: absolute; top: 40px; right: 60px;
-    z-index: 10; font-family: var(--font-display);
-    font-style: italic; font-size: 16px;
-    color: var(--text-dim); letter-spacing: 0.1em;
-  }
-  .slider-counter span { color: var(--gold); }
 
   /* ═══ VALUES ═══ */
   .values { padding: 160px 60px; }
@@ -697,103 +665,86 @@
   </div>
 </div>
 
-<!-- ═══ FULLSCREEN PRODUCT SLIDER ═══ -->
-<section class="product-slider" id="coleccion">
+<!-- ═══ EDITORIAL PRODUCT GRID ═══ -->
+<section class="product-grid-section reveal" id="coleccion">
+  <div class="product-grid-header">
+    <div class="section-eyebrow">La selección</div>
+    <h2 class="section-title">Fragancias <em>esenciales</em></h2>
+  </div>
+  <div class="product-grid">
 
-  <!-- Slide 1 — Baccarat Rouge 540 -->
-  <div class="product-slide active" data-index="0">
-    <div class="slide-bg" style="background-image: url('baccarat.jpg'); background-size: cover;"></div>
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <div class="slide-text">
-        <span class="slide-number">01</span>
-        <div class="slide-brand">Maison Francis Kurkdjian</div>
-        <h2 class="slide-name">Baccarat<br>Rouge 540</h2>
-        <div class="slide-notes">Azafrán · Jazmín · Ámbar · Cedro</div>
-        <div class="size-selector" id="sizes-0">
-          <button class="size-btn active" data-price="38€" data-size="5ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">5ml</button>
-          <button class="size-btn" data-price="65€" data-size="10ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">10ml</button>
-          <button class="size-btn" data-price="90€" data-size="15ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">15ml</button>
-        </div>
-        <div class="slide-price-row">
-          <div class="slide-price" id="price-0">38€ <span>5ML</span></div>
-          <a href="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03" class="btn" id="link-0" target="_blank">Comprar ahora</a>
-        </div>
-      </div>
-      <div class="slide-image">
+    <!-- Baccarat Rouge 540 -->
+    <div class="product-card reveal">
+      <div class="product-card-img">
         <img src="baccarat.jpg" alt="Baccarat Rouge 540">
+        <div class="product-card-overlay"></div>
+      </div>
+      <div class="product-card-info">
+        <div class="product-card-left">
+          <div class="product-card-brand">Maison Francis Kurkdjian</div>
+          <div class="product-card-name">Baccarat Rouge 540</div>
+          <div class="product-card-notes">Azafrán · Jazmín · Ámbar</div>
+        </div>
+        <div class="product-card-right">
+          <div class="card-size-selector" id="sizes-0">
+            <button class="size-btn active" data-price="38€" data-size="5ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">5ml</button>
+            <button class="size-btn" data-price="65€" data-size="10ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">10ml</button>
+            <button class="size-btn" data-price="90€" data-size="15ML" data-link="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03">15ml</button>
+          </div>
+          <div class="product-card-price" id="price-0">38€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_9B66oI5IWgakeFwc942Ji03" class="btn-discover" id="link-0" target="_blank">Comprar</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Slide 2 — Aventus -->
-  <div class="product-slide" data-index="1">
-    <div class="slide-bg" style="background-image: url('aventus.jpg'); background-size: cover;"></div>
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <div class="slide-text">
-        <span class="slide-number">02</span>
-        <div class="slide-brand">Creed</div>
-        <h2 class="slide-name">Aventus</h2>
-        <div class="slide-notes">Piña · Abedul · Almizcle · Patchouli</div>
-        <div class="size-selector" id="sizes-1">
-          <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">5ml</button>
-          <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">10ml</button>
-          <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">15ml</button>
-        </div>
-        <div class="slide-price-row">
-          <div class="slide-price" id="price-1">28€ <span>5ML</span></div>
-          <a href="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02" class="btn" id="link-1" target="_blank">Comprar ahora</a>
-        </div>
-      </div>
-      <div class="slide-image">
+    <!-- Aventus -->
+    <div class="product-card reveal">
+      <div class="product-card-img">
         <img src="aventus.jpg" alt="Aventus Creed">
+        <div class="product-card-overlay"></div>
+      </div>
+      <div class="product-card-info">
+        <div class="product-card-left">
+          <div class="product-card-brand">Creed</div>
+          <div class="product-card-name">Aventus</div>
+          <div class="product-card-notes">Piña · Abedul · Almizcle</div>
+        </div>
+        <div class="product-card-right">
+          <div class="card-size-selector" id="sizes-1">
+            <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">5ml</button>
+            <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">10ml</button>
+            <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02">15ml</button>
+          </div>
+          <div class="product-card-price" id="price-1">28€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_6oU28sgnAgak9lc7SO2Ji02" class="btn-discover" id="link-1" target="_blank">Comprar</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Slide 3 — Black Afgano -->
-  <div class="product-slide" data-index="2">
-    <div class="slide-bg" style="background-image: url('afgano.jpg'); background-size: cover;"></div>
-    <div class="slide-overlay"></div>
-    <div class="slide-content">
-      <div class="slide-text">
-        <span class="slide-number">03</span>
-        <div class="slide-brand">Nasomatto</div>
-        <h2 class="slide-name">Black<br>Afgano</h2>
-        <div class="slide-notes">Oud · Cannabis · Resinas · Madera</div>
-        <div class="size-selector" id="sizes-2">
-          <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">5ml</button>
-          <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">10ml</button>
-          <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">15ml</button>
-        </div>
-        <div class="slide-price-row">
-          <div class="slide-price" id="price-2">28€ <span>5ML</span></div>
-          <a href="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00" class="btn" id="link-2" target="_blank">Comprar ahora</a>
-        </div>
-      </div>
-      <div class="slide-image">
+    <!-- Black Afgano — Full width -->
+    <div class="product-card full-width reveal">
+      <div class="product-card-img">
         <img src="afgano.jpg" alt="Black Afgano Nasomatto">
+        <div class="product-card-overlay"></div>
+      </div>
+      <div class="product-card-info">
+        <div class="product-card-left">
+          <div class="product-card-brand">Nasomatto</div>
+          <div class="product-card-name">Black Afgano</div>
+          <div class="product-card-notes">Oud · Cannabis · Resinas</div>
+        </div>
+        <div class="product-card-right">
+          <div class="card-size-selector" id="sizes-2">
+            <button class="size-btn active" data-price="28€" data-size="5ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">5ml</button>
+            <button class="size-btn" data-price="48€" data-size="10ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">10ml</button>
+            <button class="size-btn" data-price="65€" data-size="15ML" data-link="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00">15ml</button>
+          </div>
+          <div class="product-card-price" id="price-2">28€ <span>5ML</span></div>
+          <a href="https://buy.stripe.com/test_14AbJ2gnA9LWcxoehc2Ji00" class="btn-discover" id="link-2" target="_blank">Comprar</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Slider controls -->
-  <div class="slider-counter">
-    <span id="currentSlide">01</span> / 03
-  </div>
-  <div class="slider-arrows">
-    <button class="slider-arrow" id="prevBtn">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" d="m15 18-6-6 6-6"/></svg>
-    </button>
-    <button class="slider-arrow" id="nextBtn">
-      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" d="m9 18 6-6-6-6"/></svg>
-    </button>
-  </div>
-  <div class="slider-nav">
-    <button class="slider-dot active" data-slide="0"></button>
-    <button class="slider-dot" data-slide="1"></button>
-    <button class="slider-dot" data-slide="2"></button>
   </div>
 </section>
 
@@ -983,43 +934,6 @@
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // ── Product Slider ──
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.product-slide');
-  const dots = document.querySelectorAll('.slider-dot');
-  const counter = document.getElementById('currentSlide');
-  let autoSlide;
-
-  function goToSlide(index) {
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-    currentSlide = (index + slides.length) % slides.length;
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-    counter.textContent = String(currentSlide + 1).padStart(2, '0');
-  }
-
-  function startAuto() {
-    autoSlide = setInterval(() => goToSlide(currentSlide + 1), 5000);
-  }
-  function stopAuto() { clearInterval(autoSlide); }
-
-  document.getElementById('nextBtn').addEventListener('click', () => { stopAuto(); goToSlide(currentSlide + 1); startAuto(); });
-  document.getElementById('prevBtn').addEventListener('click', () => { stopAuto(); goToSlide(currentSlide - 1); startAuto(); });
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => { stopAuto(); goToSlide(parseInt(dot.dataset.slide)); startAuto(); });
-  });
-
-  // Touch/swipe support
-  let touchStartX = 0;
-  document.querySelector('.product-slider').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-  document.querySelector('.product-slider').addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) { stopAuto(); goToSlide(diff > 0 ? currentSlide + 1 : currentSlide - 1); startAuto(); }
-  });
-
-  startAuto();
 
   // ── Size selector ──
   document.querySelectorAll('.size-selector').forEach((selector, idx) => {
