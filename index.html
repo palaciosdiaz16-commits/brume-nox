@@ -22,12 +22,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: 100%;
-  }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
@@ -37,42 +32,6 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     cursor: none;
-    height: 100%;
-  }
-
-  /* Scroll snap sections */
-  .snap-section {
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    min-height: 100vh;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  /* Scroll progress indicator */
-  .scroll-progress {
-    position: fixed;
-    right: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 500;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .progress-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--text-dim);
-    transition: all 0.3s ease;
-    cursor: none;
-  }
-  .progress-dot.active {
-    background: var(--gold);
-    transform: scale(1.6);
   }
 
   /* ═══ CUSTOM CURSOR ═══ */
@@ -674,18 +633,8 @@
   </div>
 </header>
 
-<!-- Scroll progress indicator -->
-<div class="scroll-progress" id="scrollProgress">
-  <div class="progress-dot active" data-section="0"></div>
-  <div class="progress-dot" data-section="1"></div>
-  <div class="progress-dot" data-section="2"></div>
-  <div class="progress-dot" data-section="3"></div>
-  <div class="progress-dot" data-section="4"></div>
-  <div class="progress-dot" data-section="5"></div>
-</div>
-
 <!-- ═══ HERO ═══ -->
-<section class="hero snap-section" id="inicio">
+<section class="hero" id="inicio">
   <div style="position:absolute;inset:0;background-image:url('hero.png');background-size:cover;background-position:right center;z-index:0;"></div>
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.8) 100%);z-index:1;"></div>
   <div class="hero-content">
@@ -731,7 +680,7 @@
 </div>
 
 <!-- ═══ EDITORIAL PRODUCT GRID ═══ -->
-<section class="product-grid-section snap-section" id="coleccion">
+<section class="product-grid-section reveal" id="coleccion">
   <div class="product-grid-header">
     <div class="section-eyebrow">La selección</div>
     <h2 class="section-title">Fragancias <em>esenciales</em></h2>
@@ -814,7 +763,7 @@
 </section>
 
 <!-- ═══ VALUES ═══ -->
-<section class="values snap-section">
+<section class="values reveal">
   <div class="section-header">
     <div class="section-eyebrow">Filosofía</div>
     <h2 class="section-title">Por qué <em>Brume Nox</em></h2>
@@ -839,7 +788,7 @@
 </section>
 
 <!-- ═══ MANIFESTO ═══ -->
-<section class="manifesto snap-section">
+<section class="manifesto reveal">
   <div class="manifesto-quote">
     El lujo no se ve.
     <span>Se huele.</span>
@@ -848,7 +797,7 @@
 </section>
 
 <!-- ═══ ABOUT ═══ -->
-<section class="about snap-section" id="nosotros">
+<section class="about reveal" id="nosotros">
   <div class="about-container">
     <div class="about-visual">
       <div class="about-visual-text">BN</div>
@@ -865,7 +814,7 @@
 </section>
 
 <!-- ═══ GUARANTEES ═══ -->
-<section class="guarantees snap-section">
+<section class="guarantees reveal">
   <div class="guarantees-grid">
     <div class="guarantee">
       <div class="guarantee-icon">
@@ -899,7 +848,7 @@
 </section>
 
 <!-- ═══ NEWSLETTER ═══ -->
-<section class="newsletter snap-section" id="contacto">
+<section class="newsletter reveal" id="contacto">
   <div class="newsletter-content">
     <div class="section-eyebrow">Brume Nox · Privado</div>
     <h2>Sé el primero en <em>saberlo</em>.</h2>
@@ -1013,33 +962,6 @@
       });
     });
   });
-
-  // ── Scroll snap progress indicator ──
-  const sections = document.querySelectorAll('.snap-section');
-  const progressDots = document.querySelectorAll('.progress-dot');
-
-  const snapObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-        const index = Array.from(sections).indexOf(entry.target);
-        progressDots.forEach(d => d.classList.remove('active'));
-        if (progressDots[index]) progressDots[index].classList.add('active');
-
-        // Also trigger reveal animations
-        entry.target.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-      }
-    });
-  }, { threshold: 0.5 });
-
-  sections.forEach(section => snapObserver.observe(section));
-
-  // Click on dots to navigate
-  progressDots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      sections[i]?.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
 </script>
 </body>
 </html>
