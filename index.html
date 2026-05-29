@@ -576,10 +576,22 @@
     header { padding: 20px 24px; }
     header.scrolled { padding: 14px 24px; }
     nav ul { display: none; }
-    .hero { padding: 120px 24px 60px; }
-    .slide-content { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; text-align: center; }
-    .slide-image { order: -1; }
-    .slide-image img { max-height: 40vh; }
+    .hero {
+      padding: 120px 24px 60px;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-content { max-width: 100%; }
+    .hero-eyebrow { justify-content: center; }
+    .hero p { margin: 0 auto 40px; }
+    .btn { width: auto; padding: 16px 32px; }
+    .product-grid-section { padding: 80px 24px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .product-card.full-width { grid-column: 1; }
+    .product-card.full-width .product-card-img { aspect-ratio: 4/5; }
+    .product-card-info { flex-direction: column; gap: 20px; }
+    .product-card-right { text-align: left; margin-left: 0; }
+    .card-size-selector { justify-content: flex-start; }
     .values, .manifesto, .about, .guarantees, .newsletter { padding-left: 24px; padding-right: 24px; }
     .values-grid { grid-template-columns: 1fr; }
     .about-container { grid-template-columns: 1fr; gap: 60px; }
@@ -588,7 +600,6 @@
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     .footer-brand { grid-column: 1 / -1; }
     .footer-bottom { flex-direction: column; gap: 20px; text-align: center; }
-    .slider-arrows { display: none; }
   }
 </style>
 </head>
