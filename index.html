@@ -1057,7 +1057,7 @@
 
 <script>
 
-  // ── Header scroll ──
+    // ── Header scroll ──
   const header = document.getElementById('header');
   window.addEventListener('scroll', () => {
     header.classList.toggle('scrolled', window.scrollY > 50);
@@ -1066,16 +1066,13 @@
   // ── Reveal on scroll ──
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
-      if (e.isIntersecting) { 
-        e.target.classList.add('visible'); 
-        observer.unobserve(e.target); 
-      }
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── Size selector ──
-  document.querySelectorAll('.card-size-selector').forEach((selector, idx) => {
+  document.querySelectorAll('.size-selector').forEach((selector, idx) => {
     selector.querySelectorAll('.size-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         selector.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
@@ -1108,14 +1105,6 @@
 
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
-      lightbox.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-  });
-
-  // ── Cerrar con tecla ESC ──
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('active')) {
       lightbox.classList.remove('active');
       document.body.style.overflow = 'auto';
     }
