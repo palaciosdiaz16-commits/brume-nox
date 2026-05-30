@@ -1,1 +1,23 @@
-pedir a claude que quiero algo como la pagina de tom ford seccion perfumes
+Proyecto: Brume Nox
+Marca de perfumería de nicho especializada en decants.
+Titular: Antonio Jesús Palacios Díaz
+Ciudad: Santa Margarida de Montbui, España
+Web: brumenox.com (Vercel + GitHub)
+GitHub: github.com/palaciosdiaz16-commits/brume-nox
+Dominio: Namecheap, expira Apr 2027
+Pagos: Stripe (activar modo producción pendiente)
+
+CATÁLOGO:
+- Baccarat Rouge 540 (MFK) — 38€/5ml
+- Aventus (Creed) — 28€/5ml  
+- Black Afgano (Nasomatto) — 28€/5ml
+
+IDENTIDAD:
+- Colores: Negro #000, Dorado #C9A84C, Blanco roto #E8DFC0
+- Tipografía: Cormorant Garamond (títulos) + Inter (cuerpo)
+- Eslogan: Oscuridad destilada
+
+TECNOLOGÍA:
+- Web HTML en Vercel
+- Claude Code instalado (VSCode)
+- GitHub rama main = producción
