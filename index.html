@@ -21,9 +21,11 @@
     --font-body: 'Inter', -apple-system, sans-serif;
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; cursor: default; }
-  a, button, [class*="btn"], nav a, .product-card, .size-btn, .icon-btn { cursor: pointer !important; }
-  h1, h2, h3, h4, h5, h6, p, em, .hero-eyebrow, .section-title, .product-card-brand, .product-card-name, .product-card-price, .discovery-title, .discovery-desc, .discovery-price, .value-title, .value-text, .guarantee-title, .guarantee-text, .about-visual-text, .footer-tagline, .marquee-item, .marquee-dot, .discovery-dot { cursor: text !important; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  /* El navegador pone automáticamente la "I" sobre texto y la flecha sobre lo demás (cursor: auto).
+     Solo forzamos el cursor de mano en los elementos clicables. */
+  a, button, [class*="btn"], nav a, .product-card, .size-btn, .icon-btn,
+  .logo, .footer-col a, .socials a, .newsletter-form button { cursor: pointer !important; }
   html { scroll-behavior: smooth; }
 
   body {
