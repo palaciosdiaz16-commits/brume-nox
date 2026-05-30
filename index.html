@@ -227,6 +227,7 @@
     position: relative;
     aspect-ratio: 4/5;
     overflow: hidden;
+    cursor: zoom-in !important;
   }
   .product-card-img img {
     width: 100%; height: 100%;
@@ -1108,9 +1109,13 @@
     document.body.style.overflow = 'auto';
   }
 
-  // Click en imagen de producto → abre el lightbox
-  document.querySelectorAll('.product-card-img img').forEach(img => {
-    img.addEventListener('click', () => {
+  // Click en el CONTENEDOR de la imagen → abre el lightbox
+  // (escuchamos en el contenedor para que funcione aunque haya capas encima)
+  document.querySelectorAll('.product-card-img').forEach(container => {
+    container.style.cursor = 'zoom-in';
+    container.addEventListener('click', () => {
+      const img = container.querySelector('img');
+      if (!img) return;
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt;
       lightbox.classList.add('active');
