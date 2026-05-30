@@ -675,21 +675,22 @@
 
   
 /* ═══ IMAGE ZOOM ═══ */
-.product-card-img img {
-  cursor: zoom-in;
-  transition: transform 0.4s ease;
-}
 .product-card-img {
-  overflow: visible;
+  overflow: visible !important;
 }
+
+.product-card-img img {
+  cursor: zoom-in !important;
+  transition: transform .35s ease;
+}
+
 .product-card-img img.zoomed {
-  transform: scale(2);
-  cursor: zoom-out;
-  z-index: 100;
+  transform: scale(1.8);
   position: relative;
+  z-index: 9999;
+  cursor: zoom-out !important;
 }
-to { opacity: 1; transform: scale(1); }
-  }
+
 
 </style>
 </head>
@@ -1036,7 +1037,7 @@ to { opacity: 1; transform: scale(1); }
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
   // ── Size selector ──
-  document.querySelectorAll('.size-selector').forEach((selector, idx) => {
+  document.querySelectorAll('.card-size-selector').forEach((selector, idx) => {
     selector.querySelectorAll('.size-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         selector.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
