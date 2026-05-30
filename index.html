@@ -675,16 +675,18 @@
 
   /* ═══ LIGHTBOX ═══ */
   .lightbox {
-    display: none;
+    display: flex;
     position: fixed; inset: 0;
     background: rgba(0, 0, 0, 0.95);
     z-index: 9999;
     align-items: center; justify-content: center;
-    opacity: 0; transition: opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
   .lightbox.active {
-    display: flex;
     opacity: 1;
+    pointer-events: all;
   }
   .lightbox-content {
     position: relative;
